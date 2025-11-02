@@ -1,0 +1,24 @@
+{
+  "cards": [
+    { 
+      "name": "Karina", 
+      "rarity": "SSR",
+      "image": "images/IMG_6562.PNG"
+    },
+    { 
+      "name": "Winter", 
+      "rarity": "SR",
+      "image": "images/IMG_6561.PNG"
+    },
+    { 
+      "name": "Giselle", 
+      "rarity": "R",
+      "image": "images/IMG_6559.PNG"
+    },
+    { 
+      "name": "Ningning", 
+      "rarity": "R",
+      "image": "images/IMG_6560.PNG"
+    }
+  ]
+}
