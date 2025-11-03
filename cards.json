@@ -2,22 +2,22 @@
   "cards": [
     { 
       "name": "Karina", 
-      "rarity": "SSR",
+      "rarity": "4 diamonds",
       "image": "images/IMG_6562.PNG"
     },
     { 
       "name": "Winter", 
-      "rarity": "SR",
+      "rarity": "3 diamonds",
       "image": "images/IMG_6561.PNG"
     },
     { 
       "name": "Giselle", 
-      "rarity": "R",
+      "rarity": "2 diamonds",
       "image": "images/IMG_6559.PNG"
     },
     { 
       "name": "Ningning", 
-      "rarity": "R",
+      "rarity": "1 diamond",
       "image": "images/IMG_6560.PNG"
     }
   ]
