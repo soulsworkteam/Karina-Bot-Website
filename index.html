@@ -15,36 +15,91 @@
 </head>
 
 <body>
-  <header>
-    <h1>Karina Bot</h1>
-    <p>Collect cards and build your collection!</p>
+  <header class="site-header">
+    <div class="logo">Karina Bot</div>
+    <div class="header-nav">
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="roll.html">Roll</a>
+        <a href="#inventory" class="show-inventory">Inventory</a>
+        <a href="private.html" class="requires-auth">Private</a>
+      </nav>
+      <div class="auth-links">
+        <span class="session-indicator" id="sessionIndicator">Not logged in</span>
+        <a href="login.html" class="auth-link" data-auth-link="login">Log in</a>
+        <a href="signup.html" class="btn primary slim" data-auth-link="signup">Sign up</a>
+        <button type="button" class="btn secondary slim" id="logoutBtn">Log out</button>
+      </div>
+    </div>
   </header>
 
   <main>
-    <div>
-      <button id="rollBtn">Roll</button>
-      <button id="inventoryBtn">Inventory</button>
-    </div>
-
-    <div id="cardDisplay">
-      You have <span id="cardCount">0</span> cards.
-    </div>
-
-    <div id="inventory">
-      <h2>Your Inventory</h2>
-      <div id="inventoryList">No cards yet.</div>
-      <div id="pageControls">
-        <button class="page-btn" id="prevPage">← Prev</button>
-        <span id="pageInfo">Page 1</span>
-        <button class="page-btn" id="nextPage">Next →</button>
+    <section class="hero" id="home">
+      <div class="hero-text">
+        <p class="eyebrow">Virtual Trading Card Website</p>
+        <h1>Build a virtual K-POP card collection with Karina Bot!</h1>
+        <p>Roll for Karina Bot Cards. New cards drop all the time-can you manage to get all of them?</p>
+        <div class="hero-actions">
+          <a href="roll.html" class="btn primary">Start rolling</a>
+          <button class="btn secondary show-inventory" type="button">View inventory</button>
+        </div>
       </div>
-    </div>
+      <div class="hero-card">
+        <img src="images/IMG_6562.PNG" alt="Featured Karina Bot Card" />
+        <div class="card-meta">
+          <strong>Karina</strong>
+          <span>4 diamonds rarity</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <article>
+        <h3>A Variety of Cards</h3>
+        <p>There are many different sort of cards in the Karina Bot database-can you get all of them?</p>
+      </article>
+      <article>
+        <h3>A Neat Inventory</h3>
+        <p>Your pulls are automatically added to your inventory, you just got to login though!</p>
+      </article>
+      <article>
+        <h3>Show Off</h3>
+        <p>Share screenshots of your cards, and make your friends envious of your collection.</p>
+      </article>
+    </section>
+
+    <section class="playground" id="play">
+      <div class="play-header">
+        <h2>Ready to Roll?</h2>
+        <p>Hit roll to add a random card to your collection. Check your inventory to see every pull.</p>
+      </div>
+
+      <div class="play-controls">
+        <button id="rollBtn">Roll</button>
+        <button id="inventoryBtn">Inventory</button>
+      </div>
+
+      <div id="cardDisplay">
+        You have <span id="cardCount">0</span> cards.
+      </div>
+
+      <div id="inventory">
+        <h2>Your Inventory</h2>
+        <div id="inventoryList">No cards yet.</div>
+        <div id="pageControls">
+          <button class="page-btn" id="prevPage">← Prev</button>
+          <span id="pageInfo">Page 1</span>
+          <button class="page-btn" id="nextPage">Next →</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     Karina Bot - Website
   </footer>
 
+  <script src="auth.js"></script>
   <script src="index.js"></script>
 </body>
 </html>

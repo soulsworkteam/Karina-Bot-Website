@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Vault - Karina Bot</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo">Karina Bot</div>
+    <div class="header-nav">
+      <nav>
+        <a href="index.html#home">Home</a>
+        <a href="roll.html">Roll</a>
+        <a href="index.html#inventory">Inventory</a>
+        <a href="private.html" class="requires-auth active">Private</a>
+      </nav>
+      <div class="auth-links">
+        <span class="session-indicator" id="sessionIndicator">Not logged in</span>
+        <a href="login.html" class="auth-link" data-auth-link="login">Log in</a>
+        <a href="signup.html" class="btn primary slim" data-auth-link="signup">Sign up</a>
+        <button type="button" class="btn secondary slim" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="private-page">
+    <section class="private-hero">
+      <p class="eyebrow">Private Zone</p>
+      <h1 id="privateGreeting">Securing your account.,.</h1>
+      <p>This page is only available to logged in players. Keep your information secure.</p>
+    </section>
+
+    <section class="private-grid">
+      <div class="private-card">
+        <h2>Your cards</h2>
+        <p class="private-subtitle">Only you can see the cards stored in this browser.</p>
+        <div id="privateCards" class="private-cards">Loading…</div>
+      </div>
+
+      <div class="private-card">
+        <h2>Session status</h2>
+        <ul id="sessionFacts" class="session-facts"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Karina Bot - Private Information
+  </footer>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const auth = window.karinaAuth;
+      if (!auth) return;
+      const user = auth.requireAuth("private.html");
+      if (!user) return;
+      auth.syncAuthUI();
+      hydratePrivateCards(user);
+      hydrateSessionFacts(user);
+    });
+
+    function hydratePrivateCards(user) {
+      const auth = window.karinaAuth;
+      const cards = auth.loadUserCards(user.username);
+      const container = document.getElementById("privateCards");
+      const greeting = document.getElementById("privateGreeting");
+      if (greeting) {
+        greeting.textContent = `Welcome, ${user.username}!`;
+      }
+      if (!container) return;
+      if (!cards.length) {
+        container.innerHTML = '<p class="auth-locked-message">Roll cards to add to your private database.</p>';
+        return;
+      }
+      container.innerHTML = cards
+        .map(
+          card => `
+            <article class="card-pool-card">
+              <img src="${card.image}" alt="${card.name}">
+              <strong>${card.name}</strong>
+              <span>${card.rarity}</span>
+            </article>
+          `
+        )
+        .join("");
+    }
+
+    function hydrateSessionFacts(user) {
+      const facts = document.getElementById("sessionFacts");
+      if (!facts) return;
+      facts.innerHTML = `
+        <li><strong>Username:</strong> ${user.username}</li>
+        <li><strong>Date of birth:</strong> ${user.dob || "Hidden"}</li>
+        <li><strong>Vault key:</strong> kb_cards_${user.username}</li>
+        <li><strong>Login time:</strong> ${new Date().toLocaleString()}</li>
+      `;
+    }
+  </script>
+</body>
+</html>

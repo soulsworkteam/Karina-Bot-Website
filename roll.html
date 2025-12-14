@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roll Cards - Karina Bot</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo">Karina Bot</div>
+    <div class="header-nav">
+      <nav>
+        <a href="index.html#home">Home</a>
+        <a href="roll.html" class="active">Roll</a>
+        <a href="#inventory" class="show-inventory">Inventory</a>
+        <a href="private.html" class="requires-auth">Private</a>
+      </nav>
+      <div class="auth-links">
+        <span class="session-indicator" id="sessionIndicator">Not logged in</span>
+        <a href="login.html" class="auth-link" data-auth-link="login">Log in</a>
+        <a href="signup.html" class="btn primary slim" data-auth-link="signup">Sign up</a>
+        <button type="button" class="btn secondary slim" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="roll-page">
+    <section class="roll-hero">
+      <div>
+        <p class="eyebrow">Rolling</p>
+        <h1>Every card you pull will go straight to your inventory..</h1>
+        <p>Use the roll button to draw a random card, powered by Karina Bot.</p>
+      </div>
+    </section>
+
+    <section class="roll-layout">
+      <div class="roll-panel">
+        <div class="play-header">
+          <h2>Roll Center</h2>
+          <p>Cards pulled: <span id="cardCount">0</span></p>
+        </div>
+
+        <div class="play-controls">
+          <button id="rollBtn">Roll</button>
+          <button id="inventoryBtn">Inventory</button>
+        </div>
+
+        <div id="cardDisplay">
+          Roll to reveal your first card.
+        </div>
+
+        <div id="inventory">
+          <h2>Your Inventory</h2>
+          <div id="inventoryList">No cards yet.</div>
+          <div id="pageControls">
+            <button class="page-btn" id="prevPage">← Prev</button>
+            <span id="pageInfo">Page 1</span>
+            <button class="page-btn" id="nextPage">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-pool">
+        <div class="card-pool-header">
+          <div>
+            <h2>Card Pool</h2>
+            <p>Everything you can roll, sourced directly from Karina Bot database.</p>
+          </div>
+          <span id="cardPoolCount"></span>
+        </div>
+        <div id="cardPoolGrid" class="card-pool-grid">Loading cards…</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Karina Bot - Roll Page
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
