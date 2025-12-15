@@ -245,6 +245,261 @@ main {
   margin-top: 20px;
 }
 
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.community-inventory {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.community-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.community-form input {
+  flex: 1 1 220px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.community-message {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #bdbdf3;
+}
+
+.community-results {
+  margin-top: 0;
+}
+
+.trade-page {
+  width: min(1200px, calc(100% - 40px));
+  margin: 40px auto 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.trade-hero {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.trade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.trade-card {
+  background: rgba(9, 9, 18, 0.95);
+  border-radius: 24px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trade-requests {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.private-browser {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.private-browser label,
+.trade-form label {
+  font-size: 0.85rem;
+  color: #bdbdf3;
+}
+
+.private-browser select,
+.trade-form select {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.trade-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.trade-feedback {
+  min-height: 20px;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  color: #ffb5c0;
+}
+
+.trade-feedback[data-variant="success"] {
+  color: #7effc7;
+}
+
+.card-search {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-search-results {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.card-search-placeholder {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.card-result {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 12px;
+}
+
+.card-result:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.card-result img,
+.trade-card-row img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-search-selection {
+  font-size: 0.85rem;
+  color: #7effc7;
+}
+
+.trade-request-card {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trade-request-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.trade-request-meta {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #bdbdf3;
+}
+
+.trade-request-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.trade-card-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.trade-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bbb;
+}
+
+.trade-request-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.status-pending {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.status-completed {
+  background: rgba(126, 255, 199, 0.2);
+  color: #7effc7;
+}
+
+.status-declined {
+  background: rgba(255, 138, 160, 0.2);
+  color: #ff8aa0;
+}
+
+.status-failed {
+  background: rgba(255, 184, 101, 0.2);
+  color: #ffcd82;
+}
+
 .session-facts {
   list-style: none;
   padding: 0;

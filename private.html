@@ -19,6 +19,7 @@
         <a href="index.html#home">Home</a>
         <a href="roll.html">Roll</a>
         <a href="index.html#inventory">Inventory</a>
+        <a href="trade.html" class="requires-auth">Trade</a>
         <a href="private.html" class="requires-auth active">Private</a>
       </nav>
       <div class="auth-links">
@@ -33,20 +34,20 @@
   <main class="private-page">
     <section class="private-hero">
       <p class="eyebrow">Private Zone</p>
-      <h1 id="privateGreeting">Securing your account.,.</h1>
-      <p>This page is only available to logged in players. Keep your information secure.</p>
+      <h1 id="privateGreeting">Private zone unlocked.</h1>
+      <p>Review your private information.</p>
     </section>
 
     <section class="private-grid">
       <div class="private-card">
-        <h2>Your cards</h2>
-        <p class="private-subtitle">Only you can see the cards stored in this browser.</p>
-        <div id="privateCards" class="private-cards">Loading…</div>
+        <h2>Your Private Information</h2>
+        <ul id="sessionFacts" class="session-facts"></ul>
       </div>
 
       <div class="private-card">
-        <h2>Session status</h2>
-        <ul id="sessionFacts" class="session-facts"></ul>
+        <h2>Trading</h2>
+        <p class="private-subtitle">Ready to trade? Visit the trading page to send and swap requests.</p>
+        <a class="btn primary slim" href="trade.html">Go to Trading Page</a>
       </div>
     </section>
   </main>
@@ -63,34 +64,16 @@
       const user = auth.requireAuth("private.html");
       if (!user) return;
       auth.syncAuthUI();
-      hydratePrivateCards(user);
+      hydrateGateway(user);
       hydrateSessionFacts(user);
     });
 
-    function hydratePrivateCards(user) {
+    function hydrateGateway(user) {
       const auth = window.karinaAuth;
-      const cards = auth.loadUserCards(user.username);
-      const container = document.getElementById("privateCards");
       const greeting = document.getElementById("privateGreeting");
       if (greeting) {
-        greeting.textContent = `Welcome, ${user.username}!`;
+        greeting.textContent = `Welcome back, ${user.username}!`;
       }
-      if (!container) return;
-      if (!cards.length) {
-        container.innerHTML = '<p class="auth-locked-message">Roll cards to add to your private database.</p>';
-        return;
-      }
-      container.innerHTML = cards
-        .map(
-          card => `
-            <article class="card-pool-card">
-              <img src="${card.image}" alt="${card.name}">
-              <strong>${card.name}</strong>
-              <span>${card.rarity}</span>
-            </article>
-          `
-        )
-        .join("");
     }
 
     function hydrateSessionFacts(user) {
@@ -103,6 +86,7 @@
         <li><strong>Login time:</strong> ${new Date().toLocaleString()}</li>
       `;
     }
+
   </script>
 </body>
 </html>

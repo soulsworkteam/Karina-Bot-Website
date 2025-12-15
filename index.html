@@ -22,6 +22,7 @@
         <a href="#home" class="active">Home</a>
         <a href="roll.html">Roll</a>
         <a href="#inventory" class="show-inventory">Inventory</a>
+        <a href="trade.html" class="requires-auth">Trade</a>
         <a href="private.html" class="requires-auth">Private</a>
       </nav>
       <div class="auth-links">
@@ -90,6 +91,27 @@
           <button class="page-btn" id="prevPage">← Prev</button>
           <span id="pageInfo">Page 1</span>
           <button class="page-btn" id="nextPage">Next →</button>
+        </div>
+
+        <div class="community-inventory">
+          <h3>Community Inventories</h3>
+          <p>Enter a username to browse their vault right from here.</p>
+          <form id="communityLookupForm" class="community-form">
+            <input
+              type="text"
+              id="communityUsername"
+              placeholder="username"
+              autocomplete="off"
+              required
+            />
+            <button type="submit" class="btn secondary slim" id="communityLookupSubmit">
+              View vault
+            </button>
+          </form>
+          <p id="communityInventoryMessage" class="community-message">
+            Enter a username to view their cards.
+          </p>
+          <div id="communityInventoryList" class="inventory-grid community-results"></div>
         </div>
       </div>
     </section>

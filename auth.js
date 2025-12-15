@@ -15,6 +15,11 @@
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
   }
 
+  function listUsers() {
+    const users = getUsers();
+    return Object.values(users);
+  }
+
   function getCurrentUser() {
     try {
       return JSON.parse(localStorage.getItem(AUTH_KEY));
@@ -212,5 +217,6 @@ function saveUserCards(username, cards) {
     ensureCardVault,
     requireAuth,
     syncAuthUI,
+    listUsers,
   };
 })();

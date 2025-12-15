@@ -9,6 +9,11 @@ const prevPageBtn = document.getElementById("prevPage");
 const nextPageBtn = document.getElementById("nextPage");
 const pageInfo = document.getElementById("pageInfo");
 const showInventoryTriggers = document.querySelectorAll(".show-inventory");
+const communityLookupForm = document.getElementById("communityLookupForm");
+const communityUsernameInput = document.getElementById("communityUsername");
+const communityLookupSubmit = document.getElementById("communityLookupSubmit");
+const communityInventoryList = document.getElementById("communityInventoryList");
+const communityInventoryMessage = document.getElementById("communityInventoryMessage");
 const cardPoolGrid = document.getElementById("cardPoolGrid");
 const cardPoolCount = document.getElementById("cardPoolCount");
 const authApi = window.karinaAuth || {};
@@ -65,17 +70,8 @@ function renderInventory() {
   const end = start + CARDS_PER_PAGE;
   const pageCards = cards.slice(start, end);
 
-  inventoryList.innerHTML = pageCards.length
-    ? pageCards
-        .map(
-          c =>
-            `<div style="display:flex; align-items:center; gap:10px; margin:5px 0;">
-              <img src="${getCardImage(c)}" alt="${c.name}" style="width:40px; height:auto; border-radius:5px;">
-              <span class="rarity-${c.rarity}">${c.name} (${c.rarity})</span>
-            </div>`
-        )
-        .join("")
-    : "No cards yet.";
+  const markup = renderCardRows(pageCards);
+  inventoryList.innerHTML = markup || "No cards yet.";
 
   const totalPages = Math.max(1, Math.ceil(cards.length / CARDS_PER_PAGE));
   if (pageInfo) pageInfo.textContent = `Page ${currentPage} / ${totalPages}`;
@@ -157,6 +153,68 @@ function getCardImage(card) {
   return card.image && card.image !== "undefined" ? card.image : FALLBACK_CARD_IMAGE;
 }
 
+function renderCardRows(cardArray) {
+  if (!Array.isArray(cardArray) || !cardArray.length) return "";
+  return cardArray
+    .map(
+      c =>
+        `<div style="display:flex; align-items:center; gap:10px; margin:5px 0;">
+          <img src="${getCardImage(c)}" alt="${c.name}" style="width:40px; height:auto; border-radius:5px;">
+          <span class="rarity-${c.rarity}">${c.name} (${c.rarity})</span>
+        </div>`
+    )
+    .join("");
+}
+
+function handleCommunityLookup() {
+  if (!communityUsernameInput || !communityInventoryMessage || !communityInventoryList) return;
+  if (!isAuthenticated) {
+    resetCommunityInventoryPanel("Log in to view community inventories.");
+    return;
+  }
+  const username = normalizeUsername(communityUsernameInput.value);
+  if (!username) {
+    resetCommunityInventoryPanel("Enter a username to view their cards.");
+    return;
+  }
+  if (!userExists(username)) {
+    resetCommunityInventoryPanel("No collector found with that username.");
+    return;
+  }
+  const cards =
+    authApi.loadUserCards && username
+      ? authApi.loadUserCards(username)
+      : [];
+  const markup = renderCardRows(cards);
+  if (markup) {
+    communityInventoryList.innerHTML = markup;
+    communityInventoryMessage.textContent = `${username}'s vault (${cards.length} cards).`;
+  } else {
+    communityInventoryList.innerHTML =
+      '<p class="auth-locked-message">This vault is empty.</p>';
+    communityInventoryMessage.textContent = `${username} hasn't rolled any cards yet.`;
+  }
+}
+
+function resetCommunityInventoryPanel(message) {
+  if (communityInventoryMessage) {
+    communityInventoryMessage.textContent =
+      message || "Enter a username to view their cards.";
+  }
+  if (communityInventoryList) {
+    communityInventoryList.innerHTML = "";
+  }
+}
+
+function normalizeUsername(value) {
+  return (value || "").toString().trim().toLowerCase();
+}
+
+function userExists(username) {
+  if (!username || !authApi.listUsers) return false;
+  return authApi.listUsers().some(user => user.username === username);
+}
+
 function applyAuthLocks() {
   if (!cardDisplay) return;
   if (!isAuthenticated) {
@@ -179,6 +237,16 @@ function applyAuthLocks() {
       inventoryBtn.disabled = false;
       inventoryBtn.removeAttribute("title");
     }
+  }
+
+  if (communityUsernameInput) {
+    communityUsernameInput.disabled = !isAuthenticated;
+  }
+  if (communityLookupSubmit) {
+    communityLookupSubmit.disabled = !isAuthenticated;
+  }
+  if (!isAuthenticated) {
+    resetCommunityInventoryPanel("Log in to view community inventories.");
   }
 }
 
@@ -207,6 +275,13 @@ showInventoryTriggers.forEach(trigger => {
     }
   });
 });
+
+if (communityLookupForm) {
+  communityLookupForm.addEventListener("submit", evt => {
+    evt.preventDefault();
+    handleCommunityLookup();
+  });
+}
 
 // Pagination buttons
 if (prevPageBtn) {

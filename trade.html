@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade Center - Karina Bot</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="logo">Karina Bot</div>
+    <div class="header-nav">
+      <nav>
+        <a href="index.html#home">Home</a>
+        <a href="roll.html">Roll</a>
+        <a href="index.html#inventory" class="show-inventory">Inventory</a>
+        <a href="trade.html" class="requires-auth active">Trade</a>
+        <a href="private.html" class="requires-auth">Private</a>
+      </nav>
+      <div class="auth-links">
+        <span class="session-indicator" id="sessionIndicator">Not logged in</span>
+        <a href="login.html" class="auth-link" data-auth-link="login">Log in</a>
+        <a href="signup.html" class="btn primary slim" data-auth-link="signup">Sign up</a>
+        <button type="button" class="btn secondary slim" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="trade-page">
+    <section class="trade-hero">
+      <div>
+        <p class="eyebrow">Trading Floor</p>
+        <h1>Negotiate swaps with any logged-in collector.</h1>
+        <p>Create requests, inspect responses, and keep tabs on every deal in one place.</p>
+      </div>
+    </section>
+
+    <section class="trade-grid">
+      <div class="trade-card">
+        <h2>Create a trade request</h2>
+        <p class="private-subtitle">Pick a collector, choose the card you will offer, and the card you want in return.</p>
+
+        <form id="tradeRequestForm" class="trade-form">
+          <label for="partnerInput">Partner username</label>
+          <input type="text" id="partnerInput" placeholder="collector name" autocomplete="off" required />
+
+          <div class="card-search">
+            <label for="offerSearch">Card you will offer</label>
+            <input type="text" id="offerSearch" placeholder="Search cards…" autocomplete="off" />
+            <div id="offerResults" class="card-search-results">
+              <p class="card-search-placeholder">Type to show cards from cards.json.</p>
+            </div>
+          </div>
+
+          <div class="card-search">
+            <label for="wantSearch">Card you want</label>
+            <input type="text" id="wantSearch" placeholder="Search cards…" autocomplete="off" />
+            <div id="wantResults" class="card-search-results">
+              <p class="card-search-placeholder">Type to show cards from cards.json.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn primary slim">Send trade request</button>
+        </form>
+        <p id="tradeRequestFeedback" class="trade-feedback"></p>
+      </div>
+
+      <div class="trade-card">
+        <h2>Incoming requests</h2>
+        <p class="private-subtitle">Deals that other collectors want you to review.</p>
+        <div id="incomingRequests" class="trade-requests">
+          <p class="auth-locked-message">No requests yet.</p>
+        </div>
+      </div>
+
+      <div class="trade-card">
+        <h2>Outgoing requests</h2>
+        <p class="private-subtitle">Keep track of everything you have proposed.</p>
+        <div id="outgoingRequests" class="trade-requests">
+          <p class="auth-locked-message">No requests yet.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Karina Bot - Trade Center
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="trade.js"></script>
+</body>
+</html>
